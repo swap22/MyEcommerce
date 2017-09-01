@@ -25,14 +25,17 @@
                                 Register
                             </a>
                         </li>
+                            
+                        <li>
                             <a href="customer_register.php">
                                 My Account
                             </a>
-                        <li>
                         </li>
+                        <li>
                             <a href="cart.php">
                             Go to Cart
                             </a>
+                        </li>
                         <li>
                             <a href="customer_register.php">
                             Login
