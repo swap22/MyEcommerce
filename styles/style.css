@@ -134,3 +134,9 @@ margin-bottom: 10px;
 #search .navbar-form .input-group .form-control {
     width:100%;
 }
+
+/* Slider Styles  */
+
+#slider {
+    margin-bottom:40px;
+}
