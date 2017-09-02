@@ -192,6 +192,89 @@
             </div><!-- same-height-row Ends -->
         </div><!-- container Ends -->
     </div><!-- advantages Ends -->
+    <div id="hot"><!-- hot Starts -->
+        <div class="box"><!-- box Starts -->
+            <div class="container"><!-- container Starts -->
+                <div class="col-md-12"><!-- col-md-12 Starts -->
+                    <h2>Latest this week</h2>
+                </div><!-- col-md-12 Ends -->
+            </div><!-- container Ends -->
+        </div><!-- box Ends -->
+    </div><!-- hot Ends -->
+    <div id="content" class="container"><!-- container Starts -->
+        <div class="row"><!-- row Starts -->
+            <div class='col-md-4 col-sm-6 single' >
+                <div class='product' >
+                    <a href='details.php' >
+                        <img src='admin_area/product_images/product.jpg' class='img-responsive' >
+                    </a>
+                   <div class='text' >
+                        <h3><a href='details.php' >T-Shirt</a></h3>
+                        <p class='price' >500$</p>
+                        <p class='buttons' >
+                        <a href='details.php' class='btn btn-default' >View details</a>
+                        <a href='details.php' class='btn btn-primary'>
+                        <i class='fa fa-shopping-cart'></i> Add to cart
+                        </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-4 col-sm-6 single' >
+                <div class='product' >
+                    <a href='details.php' >
+                        <img src='admin_area/product_images/product.jpg' class='img-responsive' >
+                    </a>
+                   <div class='text' >
+                        <h3><a href='details.php' >T-Shirt</a></h3>
+                        <p class='price' >500$</p>
+                        <p class='buttons' >
+                        <a href='details.php' class='btn btn-default' >View details</a>
+                        <a href='details.php' class='btn btn-primary'>
+                        <i class='fa fa-shopping-cart'></i> Add to cart
+                        </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-4 col-sm-6 single' >
+                <div class='product' >
+                    <a href='details.php' >
+                        <img src='admin_area/product_images/product.jpg' class='img-responsive' >
+                    </a>
+                   <div class='text' >
+                        <h3><a href='details.php' >T-Shirt</a></h3>
+                        <p class='price' >500$</p>
+                        <p class='buttons' >
+                        <a href='details.php' class='btn btn-default' >View details</a>
+                        <a href='details.php' class='btn btn-primary'>
+                        <i class='fa fa-shopping-cart'></i> Add to cart
+                        </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-4 col-sm-6 single' >
+                <div class='product' >
+                    <a href='details.php' >
+                        <img src='admin_area/product_images/product.jpg' class='img-responsive' >
+                    </a>
+                   <div class='text' >
+                        <h3><a href='details.php' >T-Shirt</a></h3>
+                        <p class='price' >500$</p>
+                        <p class='buttons' >
+                        <a href='details.php' class='btn btn-default' >View details</a>
+                        <a href='details.php' class='btn btn-primary'>
+                        <i class='fa fa-shopping-cart'></i> Add to cart
+                        </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div><!-- row Ends -->
+    </div><!-- container Ends -->
 
 
         <script src="js/jquery.min.js"> </script>
