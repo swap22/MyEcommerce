@@ -271,10 +271,12 @@
                     </div>
                 </div>
             </div>
-
-
         </div><!-- row Ends -->
     </div><!-- container Ends -->
+
+    <?php
+    include_once("includes/footer.php");
+    ?>
 
 
         <script src="js/jquery.min.js"> </script>
