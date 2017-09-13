@@ -146,7 +146,7 @@
                             <input type="text" class="form-control" name="ref_no" required>
                     </div><!-- form-group Ends -->
                     <div class="form-group"><!-- form-group Starts -->
-                        <label>Card No:</label>
+                        <label>check no./Demand Draft no.:</label>
                             <input type="text" class="form-control" name="code" required>
                     </div><!-- form-group Ends -->
                     <div class="form-group"><!-- form-group Starts -->
