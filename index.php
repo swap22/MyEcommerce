@@ -1,5 +1,7 @@
 <?php
 include("includes/db.php");
+
+include("functions/functions.php");
 ?>
 
 <!DOCTYPE html>
@@ -127,6 +129,8 @@ include("includes/db.php");
             <div class="carousel-inner"><!-- carousel-inner Starts -->
                                         
                         <?php
+
+                        // shows you single slide
                         $get_slides = "select * from slider LIMIT 0,1";
                         $run_slides = mysqli_query($con,$get_slides);
                         while($row_slides=mysqli_fetch_array($run_slides)){
@@ -141,6 +145,22 @@ include("includes/db.php");
                         }
 
                         ?>
+                        
+                        <?php
+                        // for remaining slider
+                        $get_slides = "select * from slider LIMIT 1,4 ";
+                        $run_slides = mysqli_query($con,$get_slides);
+                        while($row_slides = mysqli_fetch_array($run_slides)) {
+                            $slide_name = $row_slides['slide_name'];
+                            $slide_image = $row_slides['slide_image'];
+                            echo "
+                            <div class='item'>
+                            <img src='admin_area/slides_images/$slide_image'>
+                            </div>
+                            ";
+                        }
+                        ?>
+
             </div><!-- carousel-inner Ends -->
 
             <a class="left carousel-control" href="#myCarousel" data-slide="prev"><!-- left carousel-control Starts -->
