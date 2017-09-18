@@ -4,11 +4,7 @@
     </div><!-- panel-heading Ends -->
     <div class="panel-body"><!-- panel-body Starts -->
         <ul class="nav nav-pills nav-stacked category-menu"><!-- nav nav-pills nav-stacked category-menu Starts -->
-            <li><a href="shop.php">T-shirt</a></li>
-            <li><a href="shop.php">Jacket</a></li>
-            <li><a href="shop.php">Blazzer</a></li>
-            <li><a href="shop.php">Jeans</a></li>
-            <li><a href="shop.php">Formals</a></li>     
+              <?php getPCats(); ?>  
         </ul><!-- nav nav-pills nav-stacked category-menu Ends -->
     </div><!-- panel-body Ends -->
 </div><!--- panel panel-default sidebar-menu Ends -->
@@ -19,10 +15,7 @@
     </div><!-- panel-heading Ends -->
     <div class="panel-body"><!-- panel-body Starts -->
         <ul class="nav nav-pills nav-stacked category-menu"><!-- nav nav-pills nav-stacked category-menu Starts -->
-            <li><a href="shop.php">Mens</a></li>
-            <li><a href="shop.php">Women</a></li>
-            <li><a href="shop.php">kids</a></li>
-            <li><a href="shop.php">Others</a></li>     
+            <?php getCats(); ?>
         </ul><!-- nav nav-pills nav-stacked category-menu Ends -->
     </div><!-- panel-body Ends -->
 </div><!--- panel panel-default sidebar-menu Ends -->
