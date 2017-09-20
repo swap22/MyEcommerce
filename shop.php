@@ -126,71 +126,81 @@ include("functions/functions.php");
                 <?php include("includes/sidebar.php"); ?>
             </div><!-- col-md-3 Ends -->
             <div class="col-md-9" ><!-- col-md-9 Starts -->
-                <div class='box'>
-                    <h1>Shop</h1>
-                    <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using '</p>
-                </div>
+                <?php
+                    if(!isset($_GET['p_cat'])){
+                        if(!isset($_GET['cat'])){
+                            echo "
+                            <div class='box'>
+                            <h1>Shop</h1>
+                            <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using '</p>
+                            </div>
+                            ";
+                            }
+                        }
+                ?>
                 <div class="row" ><!-- row Starts -->
-                    <div class='col-md-4 col-sm-6 center-responsive' >
-                        <div class='product' >
-                            <a href='details.php' >
-                                <img src='admin_area/product_images/product.jpg' class='img-responsive' >
-                            </a>
-                                <div class='text' >
-                                    <h3><a href='details.php'></a>T-shirt</h3>
-                                    <p class='price' >$500</p>
-                                    <p class='buttons'>
-                                        <a href='details.php' class='btn btn-default' >View details</a>
-                                        <a href='details.php' class='btn btn-primary'>
-                                            <i class='fa fa-shopping-cart' ></i> Add To Cart
-                                        </a>
-                                    </p>
-                                </div>
-                        </div>
-                    </div>
-                    <div class='col-md-4 col-sm-6 center-responsive' >
-                        <div class='product' >
-                            <a href='details.php' >
-                                <img src='admin_area/product_images/product.jpg' class='img-responsive' >
-                            </a>
-                                <div class='text' >
-                                    <h3><a href='details.php'></a>T-shirt</h3>
-                                    <p class='price' >$500</p>
-                                    <p class='buttons'>
-                                        <a href='details.php' class='btn btn-default' >View details</a>
-                                        <a href='details.php' class='btn btn-primary'>
-                                            <i class='fa fa-shopping-cart' ></i> Add To Cart
-                                        </a>
-                                    </p>
-                                </div>
-                        </div>
-                    </div>
-                    <div class='col-md-4 col-sm-6 center-responsive' >
-                        <div class='product' >
-                            <a href='details.php' >
-                                <img src='admin_area/product_images/product.jpg' class='img-responsive' >
-                            </a>
-                                <div class='text' >
-                                    <h3><a href='details.php'></a>T-shirt</h3>
-                                    <p class='price' >$500</p>
-                                    <p class='buttons'>
-                                        <a href='details.php' class='btn btn-default' >View details</a>
-                                        <a href='details.php' class='btn btn-primary'>
-                                            <i class='fa fa-shopping-cart' ></i> Add To Cart
-                                        </a>
-                                    </p>
-                                </div>
-                        </div>
-                    </div>
+                    <?php
+                        if(!isset($_GET['p_cat'])) {
+                            if(!isset($_GET['cat'])){
+                            $per_page=6;
+                                if(isset($_GET['page'])){
+                                $page = $_GET['page'];
+                                }else {
+                                    $page=1;
+                                    }
+                                    $start_from = ($page-1) * $per_page ;
+                                    $get_products = "select * from products order by 1 DESC LIMIT $start_from,$per_page";
+                                    $run_products = mysqli_query($con,$get_products);
+                                    while($row_products=mysqli_fetch_array($run_products)){
+                                        $pro_id = $row_products['product_id'];
+                                        $pro_title = $row_products['product_title'];
+                                        $pro_price = $row_products['product_price'];
+                                        $pro_img1 = $row_products['product_img1'];
+                                        echo "
+                                            <div class='col-md-4 col-sm-6 center-responsive' >
+                                                <div class='product' >
+                                                    <a href='details.php?pro_id=$pro_id' >
+                                                    <img src='admin_area/product_images/$pro_img1' class='img-responsive' >
+                                                    </a>
+                                                    <div class='text' >
+                                                        <h3><a href='details.php?pro_id=$pro_id' >$pro_title</a></h3>
+                                                        <p class='price' >$$pro_price</p>
+                                                        <p class='buttons' >
+                                                        <a href='details.php?pro_id=$pro_id' class='btn btn-default' >View details</a>
+                                                        <a href='details.php?pro_id=$pro_id' class='btn btn-primary'>
+                                                        <i class='fa fa-shopping-cart' ></i> Add To Cart
+                                                        </a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ";
+                                    }
+                                
+                            
+                        ?>
                 </div><!-- row Ends -->
             <center><!-- center Starts -->
                 <ul class="pagination" ><!-- pagination Starts -->
-                    <li><a href='shop.php' >First Page</a></li>
-                    <li><a href='shop.php' >2</a></li>
-                    <li><a href='shop.php' >3</a></li>
-                    <li><a href='shop.php' >4</a></li>
-                    <li><a href='shop.php' >5</a></li>
-                    <li><a href='shop.php' >Last Page</a></li>
+                    <?php
+                        $query = "select * from products";
+                        $result = mysqli_query($con,$query);
+                        $total_records = mysqli_num_rows($result);
+                        $total_pages = ceil($total_records / $per_page);
+                        echo "
+                            <li><a href='shop.php?page=1' >".'First Page'."</a></li>
+                        ";
+                        for ($i=1; $i<=$total_pages; $i++){
+                            echo "
+                                <li><a href='shop.php?page=".$i."' >".$i."</a></li>
+                            ";
+                        };
+                        echo "
+                            <li><a href='shop.php?page=$total_pages' >".'Last Page'."</a></li>
+                            ";
+                    }
+                }
+                    ?>
                 </ul><!-- pagination Ends -->
             </center><!-- center Ends -->
         </div><!-- col-md-9 Ends -->
