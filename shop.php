@@ -203,6 +203,10 @@ include("functions/functions.php");
                     ?>
                 </ul><!-- pagination Ends -->
             </center><!-- center Ends -->
+                <?php
+                    getpcatpro();
+                    getcatpro();
+                ?>
         </div><!-- col-md-9 Ends -->
     </div><!-- container Ends -->
 </div><!-- content Ends -->
