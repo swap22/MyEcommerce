@@ -21,7 +21,7 @@ include("functions/functions.php");
                     Welcome Swapnil
                     </a>
                     <a href="#">
-                    Total Shopping Cart Price: 500$ Total Items : 5
+                    Shopping Cart Total Price: <?php total_price(); ?>, Total Items <?php items(); ?>
                     </a>
                 </div><!-- col-md-6 offer Starts -->
                 <div class="col-md-6"><!-- col-md-6 Starts -->
@@ -89,6 +89,7 @@ include("functions/functions.php");
                 </div><!-- padding-nav Ends -->
                 <a class="btn btn-primary navbar-btn right" href="cart.php"><!-- btn btn-primary navbar-btn right Starts -->
                     <i class="fa fa-shopping-cart"></i>
+                    <span> <?php items(); ?> items in cart </span>
                 </a><!-- btn btn-primary navbar-btn right Ends -->
                 <div class="navbar-collapse collapse right"><!-- navbar-collapse collapse right Starts -->
                      <button class="btn navbar-btn btn-primary" type="button" data-toggle="collapse" data-target="#search">
@@ -126,7 +127,13 @@ include("functions/functions.php");
                 <div class="box" ><!-- box Starts -->
                     <form action="cart.php" method="post" enctype="multipart-form-data" ><!-- form Starts -->
                         <h1> Shopping Cart </h1>
-                        <p class="text-muted" > You currently have 5 item(s) in your cart. </p>
+                        <?php
+                            $ip_add = getRealUserIp();
+                            $select_cart = "select * from cart where ip_add='$ip_add'";
+                            $run_cart = mysqli_query($con,$select_cart);
+                            $count = mysqli_num_rows($run_cart);
+                        ?>
+                        <p class="text-muted" > You currently have <?php echo $count; ?> item(s) in your cart. </p>
                         <div class="table-responsive" ><!-- table-responsive Starts -->
                             <table class="table" ><!-- table Starts -->
                                 <thead><!-- thead Starts -->
@@ -140,80 +147,50 @@ include("functions/functions.php");
                                     </tr>
                                 </thead><!-- thead Ends -->
                                 <tbody><!-- tbody Starts -->
+                                    <?php
+                                        $total = 0;
+                                        while($row_cart = mysqli_fetch_array($run_cart)){
+                                        $pro_id = $row_cart['p_id'];
+                                        $pro_size = $row_cart['size'];
+                                        $pro_qty = $row_cart['qty'];
+                                        $get_products = "select * from products where product_id='$pro_id'";
+                                        $run_products = mysqli_query($con,$get_products);
+                                        while($row_products = mysqli_fetch_array($run_products)){
+                                        $product_title = $row_products['product_title'];
+                                        $product_img1 = $row_products['product_img1'];
+                                        $only_price = $row_products['product_price'];
+                                        $sub_total = $row_products['product_price']*$pro_qty;
+                                        $total += $sub_total;
+                                    ?>
                                     <tr><!-- tr Starts -->
                                     <td>
-                                        <img src="admin_area/product_images/product.jpg" >
+                                        <img src="admin_area/product_images/<?php echo $product_img1; ?>" >
                                     </td>
                                     <td>
-                                        <a href="#" >T-Shirt</a>
+                                        <a href="#" > <?php echo $product_title; ?> </a>
                                     </td>
                                     <td>
-                                        2
+                                        <?php echo $pro_qty; ?>
                                     </td>
                                     <td>
-                                        $500.00
+                                        $<?php echo $only_price; ?>.00
                                     </td>
                                     <td>
-                                        Medium
+                                        <?php echo $pro_size; ?>
                                     </td>
                                     <td>
-                                        <input type="checkbox" name="remove[]" >
+                                        <input type="checkbox" name="remove[]" value="<?php echo $pro_id; ?>" >
                                     </td>
                                     <td>
-                                        $1000.00
+                                        $<?php echo $sub_total; ?>.00
                                     </td>
                                     </tr><!-- tr Ends -->
-                                    <tr><!-- tr Starts -->
-                                    <td>
-                                        <img src="admin_area/product_images/product.jpg" >
-                                    </td>
-                                    <td>
-                                        <a href="#" >T-Shirt</a>
-                                    </td>
-                                    <td>
-                                        2
-                                    </td>
-                                    <td>
-                                        $500.00
-                                    </td>
-                                    <td>
-                                        Small
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" name="remove[]" >
-                                    </td>
-                                    <td>
-                                        $1000.00
-                                    </td>
-                                    </tr><!-- tr Ends -->
-                                    <tr><!-- tr Starts -->
-                                    <td>
-                                        <img src="admin_area/product_images/product.jpg" >
-                                    </td>
-                                    <td>
-                                        <a href="#" >T-Shirt</a>
-                                    </td>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        $500.00
-                                    </td>
-                                    <td>
-                                        Large
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" name="remove[]" >
-                                    </td>
-                                    <td>
-                                        $500.00
-                                    </td>
-                                    </tr><!-- tr Ends -->
+                                    <?php } } ?>
                                 </tbody><!-- tbody Ends -->
                                 <tfoot><!-- tfoot Starts -->
                                     <tr>
                                         <th colspan="5"> Total </th>
-                                        <th colspan="2"> $2500.00 </th>
+                                        <th colspan="2"> $<?php echo $total; ?>.00 </th>
                                     </tr>
                                 </tfoot><!-- tfoot Ends -->
                             </table><!-- table Ends -->
@@ -241,39 +218,29 @@ include("functions/functions.php");
                             <h3 class="text-center"> You also like these Products </h3>
                         </div><!-- box same-height headline Ends -->
                     </div><!-- col-md-3 col-sm-6 Ends -->
-                    <div class='center-responsive col-md-3 col-sm-6 ' >
-                        <div class='product same-height' >
-                            <a href='details.php' >
-                                <img src='admin_area/product_images/product.jpg' class='img-responsive' >
+                     <?php
+                        $get_products = "select * from products order by rand() LIMIT 0,3";
+                        $run_products = mysqli_query($con,$get_products); 
+                        while($row_products = mysqli_fetch_array($run_products)) {
+                            $pro_id = $row_products['product_id'];
+                            $pro_title = $row_products['product_title'];
+                            $pro_price = $row_products['product_price'];
+                            $pro_img1 = $row_products['product_img1'];
+                            echo "
+                            <div class='center-responsive col-md-3 col-sm-6' >
+                            <div class='product same-height' >
+                            <a href='details.php?pro_id=$pro_id' >
+                            <img src='admin_area/product_images/$pro_img1' class='img-responsive' >  
                             </a>
                             <div class='text' >
-                                <h3><a href='details.php' >T-shhtrt</a></h3>
-                                <p class='price' >$1000</p>
+                            <h3> <a href='details.php?pro_id=$pro_id' >$pro_title</a> </h3>
+                            <p class='price' >$$pro_price</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class='center-responsive col-md-3 col-sm-6 ' >
-                        <div class='product same-height' >
-                            <a href='details.php' >
-                                <img src='admin_area/product_images/product.jpg' class='img-responsive' >
-                            </a>
-                            <div class='text' >
-                                <h3><a href='details.php' >T-shhtrt</a></h3>
-                                <p class='price' >$1000</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class='center-responsive col-md-3 col-sm-6 ' >
-                        <div class='product same-height' >
-                            <a href='details.php' >
-                                <img src='admin_area/product_images/product.jpg' class='img-responsive' >
-                            </a>
-                            <div class='text' >
-                                <h3><a href='details.php' >T-shhtrt</a></h3>
-                                <p class='price' >$1000</p>
                             </div>
-                        </div>
-                    </div>
+                            ";
+                        }
+                    ?>
                 </div><!-- row same-height-row Ends -->
             </div><!-- col-md-9 Ends -->
             <div class="col-md-3"><!-- col-md-3 Starts -->
@@ -289,7 +256,7 @@ include("functions/functions.php");
                             <tbody><!-- tbody Starts -->
                                 <tr>
                                     <td> Order Subtotal </td>
-                                    <th> $2500.00 </th>
+                                    <th> $<?php echo $total; ?>.00 </th>
                                 </tr>
                                 <tr>
                                     <td> Shipping and handling </td>
@@ -301,7 +268,7 @@ include("functions/functions.php");
                                 </tr>
                                 <tr class="total">
                                     <td>Total</td>
-                                    <th>$2500.00</th>
+                                    <th>$<?php echo $total; ?>.00</th>
                                 </tr>
                             </tbody><!-- tbody Ends -->
                     </table><!-- table Ends -->
