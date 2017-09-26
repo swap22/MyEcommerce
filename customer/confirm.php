@@ -20,7 +20,7 @@ include("functions/functions.php");
                     Welcome Swapnil
                     </a>
                     <a href="#">
-                    Total Shopping Cart Price: 500$ Total Items : 5
+                    Shopping Cart Total Price: <?php total_price(); ?>, Total Items <?php items(); ?>
                     </a>
                 </div><!-- col-md-6 offer Starts -->
                 <div class="col-md-6"><!-- col-md-6 Starts -->
@@ -88,6 +88,7 @@ include("functions/functions.php");
                 </div><!-- padding-nav Ends -->
                 <a class="btn btn-primary navbar-btn right" href="cart.php"><!-- btn btn-primary navbar-btn right Starts -->
                     <i class="fa fa-shopping-cart"></i>
+                    <span> <?php items(); ?> items in cart </span>
                 </a><!-- btn btn-primary navbar-btn right Ends -->
                 <div class="navbar-collapse collapse right"><!-- navbar-collapse collapse right Starts -->
                      <button class="btn navbar-btn btn-primary" type="button" data-toggle="collapse" data-target="#search">
