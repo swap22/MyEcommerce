@@ -212,6 +212,21 @@ include("functions/functions.php");
                         </div><!-- box-footer Ends -->
                     </form><!-- form Ends -->
                 </div><!-- box Ends -->
+                <?php
+                    function update_cart(){
+                        global $con;
+                        if(isset($_POST['update'])){
+                            foreach($_POST['remove'] as $remove_id){
+                                $delete_product = "delete from cart where p_id='$remove_id'";
+                                $run_delete = mysqli_query($con,$delete_product);
+                                    if($run_delete){
+                                        echo "<script>window.open('cart.php','_self')</script>";
+                                    }
+                            }
+                        }
+                    }
+                    echo @$up_cart = update_cart();
+                ?>
                 <div id="row same-height-row"><!-- row same-height-row Starts -->
                     <div class="col-md-3 col-sm-6"><!-- col-md-3 col-sm-6 Starts -->
                         <div class="box same-height headline"><!-- box same-height headline Starts -->
