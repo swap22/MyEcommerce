@@ -159,6 +159,24 @@ include("functions/functions.php");
                                 </button>
                             </div><!-- text-center Ends -->
                         </form><!-- form Ends -->
+                        <?php
+                            if(isset($_POST['submit'])){
+                            // Admin receives email through this code
+                                $sender_name = $_POST['name'];
+                                $sender_email = $_POST['email'];
+                                $sender_subject = $_POST['subject'];
+                                $sender_message = $_POST['message'];
+                                $receiver_email = "sharma.sswapnil@gmail.com";
+                                mail($receiver_email,$sender_name,$sender_subject,$sender_message,$sender_email);
+                                // Send email to sender through this code
+                                $email = $_POST['email'];
+                                $subject = "Welcome to my website";
+                                $msg = "I shall get you soon, thanks for sending us email";
+                                $from = "sharma.sswapnil@gmail.com";
+                                mail($email,$subject,$msg,$from);
+                                echo "<h2 align='center'>Your message has been sent successfully</h2>";
+                            }
+                        ?>
                     </div><!-- box Ends -->
                 </div><!-- col-md-9 Ends -->
             </div><!-- container Ends -->
