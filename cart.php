@@ -1,6 +1,6 @@
 <?php
+session_start();
 include("includes/db.php");
-
 include("functions/functions.php");
 ?>
 
@@ -18,7 +18,13 @@ include("functions/functions.php");
             <div class="container"><!-- container Starts -->
                 <div class="col-md-6 offer"><!-- col-md-6 offer Starts -->
                     <a href="#" class="btn btn-success btn-sm" >
-                    Welcome Swapnil
+                        <?php
+                            if(!isset($_SESSION['customer_email'])){
+                                echo "Welcome :Guest";
+                            }else{
+                                echo "Welcome : " . $_SESSION['customer_email'] . "";
+                            }
+                        ?>
                     </a>
                     <a href="#">
                     Shopping Cart Total Price: <?php total_price(); ?>, Total Items <?php items(); ?>
