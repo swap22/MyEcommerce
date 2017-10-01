@@ -1,5 +1,6 @@
 <div class="box"><!-- box Starts -->
     <?php
+    // through email id billing will be done
     $session_email = $_SESSION['customer_email'];
     $select_customer = "select * from customers where customer_email='$session_email'";
     $run_customer = mysqli_query($con,$select_customer);
