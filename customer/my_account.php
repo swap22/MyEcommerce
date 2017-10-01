@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(!isset($_SESSION['customer_email'])){
+echo "<script>window.open('../checkout.php','_self')</script>";
+}else {
 include("includes/db.php");
 include("functions/functions.php");
 ?>
@@ -176,3 +179,4 @@ include("functions/functions.php");
     <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
+<?php } ?>
