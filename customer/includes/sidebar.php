@@ -1,10 +1,24 @@
 <div class="panel panel-default sidebar-menu"><!-- panel panel-default sidebar-menu Starts -->
     <div class="panel-heading"><!-- panel-heading Starts -->
-        <center>
-            <img src='customer_images/download.jpg' class='img-responsive'>
-        </center>
-        <br>
-        <h3 align='center' class='panel-title'> Name : John Cena </h3>
+        <?php
+            $customer_session = $_SESSION['customer_email'];
+            $get_customer = "select * from customers where customer_email='$customer_session'";
+            $run_customer = mysqli_query($con,$get_customer);
+            $row_customer = mysqli_fetch_array($run_customer);
+            $customer_image = $row_customer['customer_image'];
+            $customer_name = $row_customer['customer_name'];
+            if(!isset($_SESSION['customer_email'])){
+            }
+            else {
+                echo "
+                <center>
+                <img src='customer_images/$customer_image' class='img-responsive'>
+                </center>
+                <br>
+                <h3 align='center' class='panel-title'> Name : $customer_name </h3>
+                ";
+            }
+        ?>
     </div><!-- panel-heading Ends -->
     <div class="panel-body"><!-- panel-body Starts -->
         <ul class="nav nav-pills nav-stacked"><!-- nav nav-pills nav-stacked Starts -->
