@@ -1,3 +1,10 @@
+<?php
+// checking whether user log in or not
+if(!isset($_SESSION['admin_email'])){
+echo "<script>window.open('login.php','_self')</script>";
+}
+else {
+?>
 <div class="row"><!-- 1 row Starts -->
     <div class="col-lg-12"><!-- col-lg-12 Starts -->
         <h1 class="page-header">Dashboard</h1>
@@ -197,3 +204,4 @@
         </div><!-- panel Ends -->
     </div><!-- col-md-4 Ends -->
 </div><!-- 3 row Ends -->
+<?php } ?>
