@@ -24,7 +24,7 @@ else {
                         <i class="fa fa-tasks fa-5x"> </i>
                     </div><!-- col-xs-3 Ends -->
                     <div class="col-xs-9 text-right"><!-- col-xs-9 text-right Starts -->
-                        <div class="huge">10 </div>
+                        <div class="huge"><?php echo $count_products; ?> </div>
                             <div>Products</div>
                     </div><!-- col-xs-9 text-right Ends -->
                 </div><!-- panel-heading row Ends -->
@@ -46,7 +46,7 @@ else {
                         <i class="fa fa-comments fa-5x"> </i>
                     </div><!-- col-xs-3 Ends -->
                     <div class="col-xs-9 text-right"><!-- col-xs-9 text-right Starts -->
-                        <div class="huge"> 125</div>
+                        <div class="huge"> <?php echo $count_customers; ?></div>
                         <div>Customers</div>
                     </div><!-- col-xs-9 text-right Ends -->
                 </div><!-- panel-heading row Ends -->
@@ -68,7 +68,7 @@ else {
                         <i class="fa fa-shopping-cart fa-5x"> </i>
                     </div><!-- col-xs-3 Ends -->
                     <div class="col-xs-9 text-right"><!-- col-xs-9 text-right Starts -->
-                        <div class="huge"> 5 </div>
+                        <div class="huge"> <?php echo $count_p_categories; ?> </div>
                         <div>Products Categories</div>
                     </div><!-- col-xs-9 text-right Ends -->
                 </div><!-- panel-heading row Ends -->
@@ -90,7 +90,7 @@ else {
                         <i class="fa fa-support fa-5x"> </i>
                     </div><!-- col-xs-3 Ends -->
                     <div class="col-xs-9 text-right"><!-- col-xs-9 text-right Starts -->
-                        <div class="huge"> 10 </div>
+                        <div class="huge"> <?php echo $count_pending_orders; ?> </div>
                         <div>Orders</div>
                     </div><!-- col-xs-9 text-right Ends -->
                 </div><!-- panel-heading row Ends -->
@@ -128,45 +128,47 @@ else {
                         </tr>
                     </thead><!-- thead Ends -->
                     <tbody><!-- tbody Starts -->
+                        <?php
+                            $i=0;
+                            $get_order = "select * from pending_orders order by 1 DESC LIMIT 0,5";
+                            $run_order = mysqli_query($con,$get_order);
+                            while($row_order=mysqli_fetch_array($run_order)){
+                            $order_id = $row_order['order_id'];
+                            $c_id = $row_order['customer_id'];
+                            $invoice_no = $row_order['invoice_no'];
+                            $product_id = $row_order['product_id'];
+                            $qty = $row_order['qty'];
+                            $size = $row_order['size'];
+                            $order_status = $row_order['order_status'];
+                            $i++;
+                            ?>
                         <tr>
-                            <td>5</td>
-                            <td>
-                            ss@gmail.com
-                            </td>
-                            <td>2565</td>
-                            <td>365</td>
-                            <td>2</td>
-                            <td>small</td>
-                            <td>
-                            pending
-                            </td>
+                        <td><?php echo $i; ?></td>
+                        <td>
+                        <?php
+                        $get_customer = "select * from customers where customer_id='$c_id'";
+                        $run_customer = mysqli_query($con,$get_customer);
+                        $row_customer = mysqli_fetch_array($run_customer);
+                        $customer_email = $row_customer['customer_email'];
+                        echo $customer_email;
+                        ?>
+                        </td>
+                        <td><?php echo $invoice_no; ?></td>
+                        <td><?php echo $product_id; ?></td>
+                        <td><?php echo $qty; ?></td>
+                        <td><?php echo $size; ?></td>
+                        <td>
+                        <?php
+                        if($order_status=='pending'){
+                        echo $order_status='pending';
+                        }
+                        else {
+                        echo $order_status='Complete';
+                        }
+                        ?>
+                        </td>
                         </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>
-                            ss@gmail.com
-                            </td>
-                            <td>2565</td>
-                            <td>365</td>
-                            <td>2</td>
-                            <td>small</td>
-                            <td>
-                            pending
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>
-                            ss@gmail.com
-                            </td>
-                            <td>2565</td>
-                            <td>365</td>
-                            <td>2</td>
-                            <td>small</td>
-                            <td>
-                            pending
-                            </td>
-                        </tr>
+                        <?php } ?>
                     </tbody><!-- tbody Ends -->
                 </table><!-- table table-bordered table-hover table-striped Ends -->
             </div><!-- table-responsive Ends -->
@@ -182,22 +184,22 @@ else {
         <div class="panel"><!-- panel Starts -->
             <div class="panel-body"><!-- panel-body Starts -->
                 <div class="thumb-info mb-md"><!-- thumb-info mb-md Starts -->
-                    <img src="admin_images/salman.jpg" class="rounded img-responsive">
+                    <img src="admin_images/<?php echo $admin_image; ?>" class="rounded img-responsive">
                     <div class="thumb-info-title"><!-- thumb-info-title Starts -->
-                        <span class="thumb-info-inner"> salman </span>
-                        <span class="thumb-info-type"> sale executive </span>
+                        <span class="thumb-info-inner"> <?php echo $admin_name; ?> </span>
+                        <span class="thumb-info-type"> <?php echo $admin_job; ?> </span>
                     </div><!-- thumb-info-title Ends -->
                 </div><!-- thumb-info mb-md Ends -->
                 <div class="mb-md"><!-- mb-md Starts -->
                     <div class="widget-content-expanded"><!-- widget-content-expanded Starts -->
-                        <i class="fa fa-user"></i> <span>Email: </span> s@gmail  <br>
-                        <i class="fa fa-user"></i> <span>Country: </span> ind   <br>
-                        <i class="fa fa-user"></i> <span>Contact: </span> 111111   <br>
+                        <i class="fa fa-user"></i> <span>Email: </span> <?php echo $admin_email; ?>  <br>
+                        <i class="fa fa-user"></i> <span>Country: </span> <?php echo $admin_country; ?>   <br>
+                        <i class="fa fa-user"></i> <span>Contact: </span> <?php echo $admin_contact; ?>   <br>
                     </div><!-- widget-content-expanded Ends -->
                     <hr class="dotted short">
                     <h5 class="text-muted">About</h5>
                     <p>
-                    khjgygtfutftufgyugfiuguyygiygyvyutduygvg
+                    <?php echo $admin_about; ?>
                     </p>
                 </div><!-- mb-md Ends -->
             </div><!-- panel-body Ends -->
