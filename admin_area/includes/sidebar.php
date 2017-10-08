@@ -19,30 +19,30 @@ else {
             <li class="dropdown" ><!-- dropdown Starts -->
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" ><!-- dropdown-toggle Starts -->
                 <i class="fa fa-user" ></i>
-                Swapnil <b class="caret" ></b>
+                <?php echo $admin_name; ?> <b class="caret" ></b>
                 </a><!-- dropdown-toggle Ends -->
                 <ul class="dropdown-menu" ><!-- dropdown-menu Starts -->
                     <li><!-- li Starts -->
-                        <a href="index.php?user_profile" >
+                        <a href="index.php?user_profile=<?php echo $admin_id; ?>" >
                             <i class="fa fa-fw fa-user" ></i> Profile
                         </a>
                     </li><!-- li Ends -->
                     <li><!-- li Starts -->
                         <a href="index.php?view_products" >
                             <i class="fa fa-fw fa-envelope" ></i> Products 
-                            <span class="badge" >5</span>
+                            <span class="badge" ><?php echo $count_products; ?></span>
                         </a>
                     </li><!-- li Ends -->
                     <li><!-- li Starts -->
                         <a href="index.php?view_customers" >
                             <i class="fa fa-fw fa-gear" ></i> Customers
-                            <span class="badge" >10</span>
+                            <span class="badge" ><?php echo $count_customers; ?></span>
                         </a>
                     </li><!-- li Ends -->
                     <li><!-- li Starts -->
                         <a href="index.php?view_p_cats" >
                             <i class="fa fa-fw fa-gear" ></i> Product Categories
-                            <span class="badge" >7</span>
+                            <span class="badge" ><?php echo $count_p_categories; ?></span>
                         </a>
                     </li><!-- li Ends -->
                     <li class="divider"></li>
